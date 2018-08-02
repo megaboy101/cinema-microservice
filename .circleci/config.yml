@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  hello:
+  build:
     docker:
       - image: circleci/node:8
     working_directory: ~/cinema-api-mod
