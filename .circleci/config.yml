@@ -6,4 +6,4 @@ jobs:
     working_directory: ~/cinema-api-mod
     steps:
       - checkout
-      - run: scripts/deploy.sh
+      - run: chmod 744 scripts/deploy.sh
