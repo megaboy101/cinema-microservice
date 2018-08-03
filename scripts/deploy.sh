@@ -1,14 +1,15 @@
 #!/bin/bash
 
-cd packages
-
-packages=$(ls -d */)
 
 # Checks if there are any packages
-if [ -d "$packages" ]; then
+if [ ! -d "$packages" ]; then
   echo "No packages to deploy"
   exit
 fi
+
+cd packages
+
+packages=$(ls -d */)
 
 # Iterate through each package
 for package_route in $packages; do
