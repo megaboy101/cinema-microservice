@@ -1,9 +1,47 @@
 version: 2
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/node:8
     working_directory: ~/cinema-api-mod
     steps:
       - checkout
-      - run: chmod 744 scripts/deploy.sh
+      - run:
+          name: Test Packages
+          command: chmod 744 scripts/test.sh
+  
+  deploy:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/cinema-api-mod
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install Docker Client
+          command: |
+            set -x
+            VERSION="17.03.0-ce"
+            curl -L -o /tmp/docker-$VERSION.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
+      - run:
+          name: Build Images
+          command: |
+            TAG=0.0.$CIRCLE_BUILD_NUM
+            chmod 744 scripts/build.sh $TAG
+      - run:
+          name: Login to Docker
+          command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - run:
+          name: Deploy Images to Docker Hub
+          command: chmod 744 scripts/deploy.sh
+
+workflows:
+  version: 2
+  
+  update:
+    jobs:
+      - test
+      - deploy

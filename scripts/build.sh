@@ -6,7 +6,7 @@ packages=$(ls -d */)
 
 # Checks if there are any packages
 if [ -d "$packages" ]; then
-  echo "No packages to deploy"
+  echo "No packages to build"
   exit
 fi
 
@@ -23,8 +23,8 @@ for package_route in $packages; do
     # Only build packages with necessary config
     if [ -f "Dockerfile" ]; then
       echo "Building package: $package"
-      # Push image to Docker Hub account
-      docker push $DOCKER_USERNAME/$package:$1
+      # Build into an image
+      docker build . -t $DOCKER_USERNAME/$package:$1 # Tag the build with current project version
     fi
 
     # Change out
