@@ -28,8 +28,7 @@ jobs:
       - run:
           name: Build Images
           command: |
-            TAG=0.0.$CIRCLE_BUILD_NUM
-            chmod 744 scripts/build.sh && scripts/build.sh $TAG
+            chmod 744 scripts/build.sh && scripts/build.sh
       - run:
           name: Login to Docker
           command: |

@@ -24,7 +24,7 @@ for package_route in $packages; do
     if [ -f "Dockerfile" ]; then
       echo "Building package: $package"
       # Build into an image
-      docker build . -t $DOCKER_USERNAME/$package:$1 # Tag the build with current project version
+      docker build . -t $DOCKER_USERNAME/$package:latest
     fi
 
     # Change out
