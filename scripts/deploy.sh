@@ -2,7 +2,7 @@
 
 
 # Checks if there are any packages
-if [ ! -d "$packages" ]; then
+if [ ! -d "packages" ]; then
   echo "No packages to deploy"
   exit
 fi
@@ -21,9 +21,9 @@ for package_route in $packages; do
     # Change into the package
     cd $package
 
-    # Only build packages with necessary config
+    # Only push packages with necessary config
     if [ -f "Dockerfile" ]; then
-      echo "Building package: $package"
+      echo "Deploying package: $package"
       # Push image to Docker Hub account
       docker push $DOCKER_USERNAME/$package:$1
     fi

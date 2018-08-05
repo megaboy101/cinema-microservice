@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Checks if there are any packages
-if [ ! -d "$packages" ]; then
+if [ ! -d "packages" ]; then
   echo "No packages to build"
   exit
 fi
@@ -25,6 +25,8 @@ for package_route in $packages; do
       echo "Building package: $package"
       # Build into an image
       docker build . -t $DOCKER_USERNAME/$package:latest
+    else
+      echo "No Dockerfile found for package $package"
     fi
 
     # Change out
