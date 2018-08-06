@@ -28,6 +28,7 @@ mediator.on("db.ready", (client: MongoClient) => {
       return Server.start({
         port: serverSettings.port,
         repo,
+        ssl: serverSettings.ssl,
       });
     })
     .then((app) => {

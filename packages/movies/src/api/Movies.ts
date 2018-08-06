@@ -6,6 +6,10 @@ export class Movies {
   public static route(app: express.Express, options: ServerConfig): void {
     const { repo } = options;
 
+    if (!repo) {
+      throw new Error("Repository connection required");
+    }
+
     app.get("/movies", (_: express.Request, res: express.Response, next: express.NextFunction) => {
       repo
         .fetchMovies()

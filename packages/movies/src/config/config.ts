@@ -1,5 +1,6 @@
+import { ServerConfig } from "../server/ServerConfig";
 import { DbConfig } from "./DbConfig";
-import { ServerConfig } from "./ServerConfig";
+import * as ssl from "./ssl";
 
 export const dbSettings: DbConfig = {
   db: process.env.DB || "movies",
@@ -40,4 +41,5 @@ export const dbSettings: DbConfig = {
 
 export const serverSettings: ServerConfig = {
   port: process.env.PORT || "3000",
+  ssl,
 };
